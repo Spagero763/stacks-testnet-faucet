@@ -1,0 +1,4 @@
+contracts:
+  - name: faucet
+    path: contracts/faucet.clar
+    clarity_version: 3

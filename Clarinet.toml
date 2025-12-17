@@ -1,0 +1,12 @@
+[project]
+name = "stacks-testnet-faucet"
+description = "A Stacks testnet faucet using chainhooks"
+clarity_version = 3
+
+[contracts.faucet]
+path = "contracts/faucet.clar"
+
+[networks.testnet]
+stacks_node_rpc_address = "https://stacks-node-api.testnet.stacks.co"
+bitcoin_node_rpc_address = "https://blockstream.info/testnet/api"
+deployer ="ST26TQH4FRPTKHQEYE6HZQG98R4CZE6PTJ8J1YYR8"

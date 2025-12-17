@@ -1,0 +1,21 @@
+{
+  "chainhook_type": "stacks",
+  "network": "testnet",
+  "name": "faucet-claim-hook",
+  "version": 1,
+  "start_block": 0,
+  "end_block": null,
+  "event_types": ["contract_call"],
+  "predicate": {
+    "contract_call": {
+      "contract_identifier": "ST26TQH4FRPTKHQEYE6HZQG98R4CZE6PTJ8J1YYR8.faucet",
+      "function_name": "claim"
+    }
+  },
+  "action": {
+    "http": {
+      "url": "http://localhost:3001/chainhook",
+      "method": "POST"
+    }
+  }
+}
