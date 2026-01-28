@@ -30,6 +30,16 @@
   )
 )
 
+;; Get faucet balance
+(define-read-only (get-faucet-balance)
+  (stx-get-balance CONTRACT-OWNER)
+)
+
+;; Get faucet drip amount
+(define-read-only (get-drip-amount)
+  FAUCET-AMOUNT
+)
+
 (define-public (claim)
   (let ((caller tx-sender))
     (match (map-get? last-claim { user: caller })
