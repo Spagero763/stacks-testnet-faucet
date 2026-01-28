@@ -3,6 +3,7 @@
   "network": "testnet",
   "name": "faucet-claim-hook",
   "version": 1,
+  
   "start_block": 0,
   "end_block": null,
   "event_types": ["contract_call"],
