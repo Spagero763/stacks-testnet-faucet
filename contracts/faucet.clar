@@ -1,4 +1,11 @@
+;; Faucet contract for Stacks testnet
+;; Dispenses tSTX to users with cooldown period
+
 (define-constant FAUCET-AMOUNT u1000000) ;; 1 STX
+(define-constant COOLDOWN-BLOCKS u144)   ;; ~24 hours
+
+;; Error codes
+(define-constant ERR-COOLDOWN-ACTIVE (err u100))
 
 (define-map last-claim
   { user: principal }
@@ -10,8 +17,8 @@
     (match (map-get? last-claim { user: caller })
       last-entry
         ;; User has claimed before
-        (if (< (- block-height (get block-height last-entry)) u144)
-            (err u100) ;; Too early
+        (if (< (- block-height (get block-height last-entry)) COOLDOWN-BLOCKS)
+            ERR-COOLDOWN-ACTIVE
             (begin
               (map-set last-claim
                 { user: caller }
