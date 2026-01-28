@@ -6,6 +6,10 @@
 
 ;; Error codes
 (define-constant ERR-COOLDOWN-ACTIVE (err u100))
+(define-constant ERR-TRANSFER-FAILED (err u101))
+
+;; Contract owner (faucet fund holder)
+(define-constant CONTRACT-OWNER tx-sender)
 
 (define-map last-claim
   { user: principal }
@@ -38,11 +42,11 @@
                 { user: caller }
                 { block-height: block-height }
               )
-              (stx-transfer?
+              (as-contract (stx-transfer?
                 FAUCET-AMOUNT
-                tx-sender
+                CONTRACT-OWNER
                 caller
-              )
+              ))
             )
         )
       ;; First-time claimer
@@ -51,11 +55,11 @@
           { user: caller }
           { block-height: block-height }
         )
-        (stx-transfer?
+        (as-contract (stx-transfer?
           FAUCET-AMOUNT
-          tx-sender
+          CONTRACT-OWNER
           caller
-        )
+        ))
       )
     )
   )
