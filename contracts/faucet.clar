@@ -12,6 +12,20 @@
   { block-height: uint }
 )
 
+;; Check if user can claim and blocks remaining
+(define-read-only (get-claim-status (user principal))
+  (match (map-get? last-claim { user: user })
+    last-entry
+      (let ((blocks-since (- block-height (get block-height last-entry))))
+        (if (>= blocks-since COOLDOWN-BLOCKS)
+            { can-claim: true, blocks-remaining: u0 }
+            { can-claim: false, blocks-remaining: (- COOLDOWN-BLOCKS blocks-since) }
+        )
+      )
+    { can-claim: true, blocks-remaining: u0 }
+  )
+)
+
 (define-public (claim)
   (let ((caller tx-sender))
     (match (map-get? last-claim { user: caller })
