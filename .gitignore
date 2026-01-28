@@ -1,13 +1,30 @@
-
+# Network configs with secrets
 **/settings/Mainnet.toml
 **/settings/Testnet.toml
+
+# Clarinet cache
 .cache/**
 history.txt
+.clarinet/
 
-logs
+# Logs
+logs/
 *.log
 npm-debug.log*
-coverage
+
+# Test outputs
+coverage/
 *.info
 costs-reports.json
-node_modules
+
+# Dependencies
+node_modules/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# OS
+.DS_Store
+Thumbs.db
