@@ -1,12 +1,20 @@
 [project]
 name = "stacks-testnet-faucet"
-description = "A Stacks testnet faucet using chainhooks"
-clarity_version = 3
+description = "A Stacks testnet faucet for developers"
+authors = []
+telemetry = false
+cache_dir = ".cache"
+
+[[project.requirements]]
+contract_id = "SP000000000000000000002Q6VF78.pox-4"
 
 [contracts.faucet]
 path = "contracts/faucet.clar"
+clarity_version = 3
+epoch = 3.0
 
-[networks.testnet]
-stacks_node_rpc_address = "https://stacks-node-api.testnet.stacks.co"
-bitcoin_node_rpc_address = "https://blockstream.info/testnet/api"
-deployer ="ST26TQH4FRPTKHQEYE6HZQG98R4CZE6PTJ8J1YYR8"
+[repl.analysis]
+passes = ["check_checker"]
+check_checker = { trusted_sender = false, trusted_caller = false }
+
+[repl.analysis.check_checker.callee_filter]
